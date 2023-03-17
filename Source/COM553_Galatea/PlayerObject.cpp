@@ -14,10 +14,11 @@ APlayerObject::APlayerObject()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	// <--- Added 14/03/2023 --->
+	// <--- Added 14/03/2023 Edited 15/03/2023 --->
 	
-	Torque = 10000000000.0f;
-	Mass = 700.0f;
+	Torque = 50.0f;
+	Mass = 1000000.0f;
+	IsCube = true;
 
 	// Setting Up Components
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root Component"));
@@ -28,14 +29,15 @@ APlayerObject::APlayerObject()
 	SpringArm->SetupAttachment(PhysicalMesh);
 	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
 	SpringArm->SetRelativeLocationAndRotation(FVector(0.0f, 0.0f, 50.0f), FRotator(-60.0f, 0.0f, 0.0f));
-	SpringArm->TargetArmLength = 1000.0f;
+	SpringArm->TargetArmLength = 800.0f;
 	SpringArm->bEnableCameraLag = true;
+	SpringArm->bUsePawnControlRotation = true;
 	SpringArm->CameraLagSpeed = 3.0f;
 
 	// Auto Posess Pawn
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 
-	// <--- Added 14/03/2023 --->
+	// <--- Added 14/03/2023 Edited 15/03/2023 --->
 
 }
 
@@ -46,31 +48,30 @@ void APlayerObject::BeginPlay()
 	
 }
 
-// <--- Added 14/03/2023 --->
+// <--- Added 14/03/2023 Edited 17/03/2023 --->
 
 // Input
-void APlayerObject::ObjectPitch(float Axis)
+void APlayerObject::ObjectPitch_Implementation(float Axis)
 {
-	MovementInput.X = FMath::Clamp<float>(Axis, -1.0f, 1.0f);
 }
 
-void APlayerObject::ObjectRoll(float Axis)
+void APlayerObject::ObjectRoll_Implementation(float Axis)
 {
-	MovementInput.Y = FMath::Clamp<float>(Axis, -1.0f, 1.0f);
 }
 
-void APlayerObject::MousePitch(float Axis)
+void APlayerObject::MousePitch_Implementation(float Axis)
 {
-	CameraInput.Y = Axis;
 }
 
-void APlayerObject::MouseYaw(float Axis)
+void APlayerObject::MouseYaw_Implementation(float Axis)
 {
-	CameraInput.X = Axis;
 }
+
+
+
 // End Input
 
-// <--- Added 14/03/2023 --->
+// <--- Added 14/03/2023 Edited 17/03/2023 --->
 
 // Called every frame
 void APlayerObject::Tick(float DeltaTime)
@@ -81,22 +82,6 @@ void APlayerObject::Tick(float DeltaTime)
 
 	// Set Mass
 	
-
-	// Camera Control
-	FRotator NewRotation = SpringArm->GetComponentRotation();
-	NewRotation.Pitch = FMath::Clamp(NewRotation.Pitch + CameraInput.Y, -80.0f,-15.0f);
-	NewRotation.Yaw = NewRotation.Yaw + CameraInput.X;
-	SpringArm->SetWorldRotation(NewRotation);
-
-	// Movement  Control
-	if (!MovementInput.IsZero())
-	{
-		MovementInput = MovementInput.GetSafeNormal() * Torque;
-		PhysicalMesh->AddForce(FVector( ((MovementInput.X)/8 * DeltaTime) , 0.0f, 0.0f) );
-		PhysicalMesh->AddTorque(FVector( (MovementInput.X * DeltaTime) , 0.0f, 0.0f ) );
-		PhysicalMesh->AddForce(FVector(0.0f, -((MovementInput.Y)/8 * DeltaTime), 0.0f) );
-		PhysicalMesh->AddTorque(FVector( 0.0f, -(MovementInput.Y * DeltaTime), 0.0f) );
-	}
 
 	// <--- Added 14/03/2023 --->
 
@@ -114,7 +99,11 @@ void APlayerObject::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	InputComponent->BindAxis("ObjectRoll", this, &APlayerObject::ObjectRoll);
 	InputComponent->BindAxis("MousePitch", this, &APlayerObject::MousePitch);
 	InputComponent->BindAxis("MouseYaw", this, &APlayerObject::MouseYaw);
+	
 
 	// <--- Added 14/03/2023 --->
 }
+
+
+
 
