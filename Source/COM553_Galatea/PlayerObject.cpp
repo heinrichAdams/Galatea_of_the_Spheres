@@ -14,11 +14,16 @@ APlayerObject::APlayerObject()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	// <--- Added 14/03/2023 Edited 15/03/2023 --->
+	// <--- Added 14/03/2023 Edited 21/03/2023 --->
 	
 	Torque = 50.0f;
 	Mass = 1000000.0f;
 	IsCube = true;
+	IsCharging = false;
+	B_Launch = false;
+	ChargeAmount = 0.0f;
+	Velocity = FVector(0);
+
 
 	// Setting Up Components
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root Component"));
@@ -37,7 +42,7 @@ APlayerObject::APlayerObject()
 	// Auto Posess Pawn
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 
-	// <--- Added 14/03/2023 Edited 15/03/2023 --->
+	// <--- Added 14/03/2023 Edited 21/03/2023 --->
 
 }
 

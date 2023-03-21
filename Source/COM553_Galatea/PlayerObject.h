@@ -19,7 +19,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	// <--- Added 14/03/2023 Edited 15/03/2023 --->
+	// <--- Added 14/03/2023 Edited 21/03/2023 --->
 
 	// Camera and Spring arm for smooth mouse movment
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -35,14 +35,23 @@ protected:
 	// Input variables
 	FVector2D MovementInput;
 	FVector2D CameraInput;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		float Torque;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		float Mass;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		bool IsCube;
 
-	// <--- Added 14/03/2023 Edited 15/03/2023 --->
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float Torque;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float Mass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool IsCube;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool IsCharging;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool B_Launch;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float ChargeAmount;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector Velocity;
+
+	// <--- Added 14/03/2023 Edited 21/03/2023 --->
 
 
 public:	
@@ -52,7 +61,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	// <--- Added 14/03/2023 Edited 17/03/2023 --->
+	// <--- Added 14/03/2023 Edited 21/03/2023 --->
 	
 	
 
@@ -77,15 +86,41 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Attributes")
 	bool GetIsCube() { return IsCube; }
 
+	UFUNCTION(BlueprintCallable, Category = "Attributes")
+	bool GetIsCharging() { return IsCharging; }
+
+	UFUNCTION(BlueprintCallable, Category = "Attributes")
+	bool GetB_Launch() { return B_Launch; }
+
+	UFUNCTION(BlueprintCallable, Category = "Attributes")
+	float GetChargeAmount() { return ChargeAmount; }
+
+
 	
 
 	// Setters
 	UFUNCTION(BlueprintCallable, Category = "Attributes")
 	void SetTorque(float _Torque) { this->Torque = _Torque; }
+
 	UFUNCTION(BlueprintCallable, Category = "Attributes")
 	void SetMass(float _Mass) { this->Mass = _Mass; }
+
 	UFUNCTION(BlueprintCallable, Category = "Attributes")
 	void SetIsCube(bool _IsCube) { this->IsCube = _IsCube; }
 
-	// <--- Added 14/03/2023 Edited 17/03/2023 --->
+	UFUNCTION(BlueprintCallable, Category = "Attributes")
+	void SetIsCharging(bool _IsCharging) { this->IsCharging = _IsCharging; }
+
+	UFUNCTION(BlueprintCallable, Category = "Attributes")
+	void SetB_Launch(bool _B_Launch) { this->B_Launch = _B_Launch; }
+
+	UFUNCTION(BlueprintCallable, Category = "Attributes")
+	void SetChargeAmount(float _ChargeAmount) { this->ChargeAmount = _ChargeAmount; }
+
+	UFUNCTION(BlueprintCallable, Category = "Attributes")
+	void SetVelocity(FVector _Velocity) { this->Velocity = _Velocity; }
+
+
+
+	// <--- Added 14/03/2023 Edited 21/03/2023 --->
 };
