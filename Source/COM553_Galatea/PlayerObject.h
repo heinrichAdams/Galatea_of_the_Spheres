@@ -61,15 +61,11 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	// <--- Added 14/03/2023 Edited 21/03/2023 --->
+	// <--- Added 14/03/2023 Edited 31/03/2023 --->
 	
 	
 
 	// Input functions
-	UFUNCTION(BlueprintNativeEvent, Category = "Input")
-	void ObjectPitch(float Axis);
-	UFUNCTION(BlueprintNativeEvent, Category = "Input")
-	void ObjectRoll(float Axis);
 	UFUNCTION(BlueprintNativeEvent, Category = "Input")
 	void MousePitch(float Axis);
 	UFUNCTION(BlueprintNativeEvent, Category = "Input")
@@ -122,5 +118,5 @@ public:
 
 
 
-	// <--- Added 14/03/2023 Edited 21/03/2023 --->
+	// <--- Added 14/03/2023 Edited 31/03/2023 --->
 };
