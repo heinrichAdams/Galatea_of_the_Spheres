@@ -53,16 +53,10 @@ void APlayerObject::BeginPlay()
 	
 }
 
-// <--- Added 14/03/2023 Edited 17/03/2023 --->
+// <--- Added 14/03/2023 Edited 31/03/2023 --->
 
 // Input
-void APlayerObject::ObjectPitch_Implementation(float Axis)
-{
-}
 
-void APlayerObject::ObjectRoll_Implementation(float Axis)
-{
-}
 
 void APlayerObject::MousePitch_Implementation(float Axis)
 {
@@ -76,7 +70,7 @@ void APlayerObject::MouseYaw_Implementation(float Axis)
 
 // End Input
 
-// <--- Added 14/03/2023 Edited 17/03/2023 --->
+// <--- Added 14/03/2023 Edited 31/03/2023 --->
 
 // Called every frame
 void APlayerObject::Tick(float DeltaTime)
@@ -97,16 +91,14 @@ void APlayerObject::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	// <--- Added 14/03/2023 --->
+	// <--- Added 14/03/2023 Edited 31/03/2023 --->
 
 	// Input Setup
-	InputComponent->BindAxis("ObjectPitch", this, &APlayerObject::ObjectPitch);
-	InputComponent->BindAxis("ObjectRoll", this, &APlayerObject::ObjectRoll);
 	InputComponent->BindAxis("MousePitch", this, &APlayerObject::MousePitch);
 	InputComponent->BindAxis("MouseYaw", this, &APlayerObject::MouseYaw);
 	
 
-	// <--- Added 14/03/2023 --->
+	// <--- Added 14/03/2023 Edited 31/03/2023 --->
 }
 
 
